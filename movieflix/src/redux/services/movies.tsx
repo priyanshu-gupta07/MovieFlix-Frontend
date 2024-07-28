@@ -70,7 +70,7 @@ export const moviesApi = createApi({
       }),
   
       getSingleMovie: builder.query<MovieResponse, number>({
-        query: (id) => ({ url: `/movie/get_one/${id}` }),
+        query: (id) => ({ url: `/movie/${id}` }),
         providesTags: ["Single-Movie"],
       }),
   

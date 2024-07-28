@@ -45,43 +45,47 @@ const MovieCarouselItem = ({item}: MovieCarouselItemProps) => {
   }
 
   return (
-    <div
-        className="item bg-white/10 m-2 flex flex-col gap-3"
-        data-value={item.id}
-      >
-        <div className="overflow-hidden max-w-[100%] h-80">
-          <img
-            className="h-full w-full"
-            src={item.image}
-            alt={item.title}
-          />
-        </div>
-        <Link
-          to={`/movie/${item.id}`}
-          className="block text-center text-sky-500 font-bold pb-2"
+  <div
+    className="item bg-gradient-to-br from-black to-red-900 m-2 flex flex-col gap-3 rounded-lg overflow-hidden shadow-lg border border-red-800"
+    data-value={item.id}
+  >
+    <div className="overflow-hidden max-w-[100%] h-80">
+      <img
+        className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
+        src={item.image}
+        alt={item.title}
+      />
+    </div>
+    <Link
+      to={`/movie/${item.id}`}
+      className="block text-center text-red-400 font-bold text-lg hover:text-red-300 transition-colors duration-300 py-2"
+    >
+      {item.title} ({item.year})
+    </Link>
+    <p className="text-sm flex justify-between px-4 text-gray-300">
+      Rating:{" "}
+      <span className="ps-3 text-yellow-500">{item.rating}&#47;10</span>
+      <span className="ms-auto text-yellow-500 text-lg">&#10027;</span>
+    </p>
+    <div className="flex flex-row justify-between items-center text-sm bg-black/50 px-4 py-3">
+      <p className="flex justify-center items-center gap-2">
+        <Button 
+          disabled={isFavLoading} 
+          onClick={() => handleAddFavorite(item.id)} 
+          btnClass="bg-transparent text-2xl text-red-500 hover:bg-red-900/50 active:bg-red-900/50 p-2 rounded-full transition-colors duration-300"
         >
-          {item.title} ({item.year})
-        </Link>
-        <p className="text-sm flex justify-between px-4">
-          Rating:{" "}
-          <span className="ps-3 text-yellow-600">{item.rating}&#47;10</span>
-          <span className="ms-auto text-sky-600 text-lg">&#10027;</span>
-        </p>
-        <div className="flex flex-row justify-between items-center text-sm bg-black/30 px-4 py-2">
-          <p className="flex justify-center items-center gap-1">
-            <Button disabled={isFavLoading} onClick={() => handleAddFavorite(item.id)} btnClass="bg-transparent text-2xl text-red-500 hover:bg-white/50 active:bg-white/50 p-2 hover:text-white active:text-white">
-            {item.is_favorite ? (
-              <FavoriteSVG isFavorite={true} />
-            ) : (
-              <FavoriteSVG isFavorite={false} />
-            )}
-            </Button>
-            <span>{item.total_favorites}</span>
-          </p>
-          <p>Comment: {item.total_comments}</p>
-        </div>
-      </div>
-  )
+          {item.is_favorite ? (
+            <FavoriteSVG isFavorite={true} />
+          ) : (
+            <FavoriteSVG isFavorite={false} />
+          )}
+        </Button>
+        <span className="text-gray-300">{item.total_favorites}</span>
+      </p>
+      <p className="text-gray-300">Comments: {item.total_comments}</p>
+    </div>
+  </div>
+)
 }
 
 export default MovieCarouselItem

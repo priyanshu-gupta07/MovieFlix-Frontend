@@ -3,7 +3,7 @@ const Footer = () => {
   const year = date.getFullYear()
   return (
     <footer className="p-6 text-center">
-        <p>&copy; {year} FilmWise, Inc. All Rights Reserved.</p>
+        <p>&copy; {year} Movieflix, Inc. All Rights Reserved.</p>
       </footer>
   )
 }
